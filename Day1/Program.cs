@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+
 string path = Environment.CurrentDirectory + "/input.txt";
 
 String input = File.ReadAllText(path);
