@@ -27,12 +27,15 @@ namespace Day2
             string[] rounds = input.Split('\n');
 
 
-            int score = 0;
+            int scorePart1 = 0, scorePart2 = 0;
             foreach (var item in rounds)
             {
-                score += getResult(GetMove(item[0]), GetMove(item[2]));
+                Moves opponentMove = GetMove(item[0]);
+                scorePart1 += getResult(opponentMove, GetMove(item[2]));
+                scorePart2 += getResult(opponentMove, GetNewMove(opponentMove, item[2]));
             }
-            Console.WriteLine(score);
+            Console.WriteLine("Score part 1: " + scorePart1);
+            Console.WriteLine("Score part 2: " + scorePart2);
         }
 
         static Moves GetMove(char move)
@@ -55,6 +58,59 @@ namespace Day2
                 return Moves.None;
             }
 
+        }
+
+        static Moves GetNewMove(Moves opponent, char player)
+        {
+            if (player == 'Y')
+            {
+                return opponent;
+            }
+
+            if (opponent == Moves.Rock)
+            {
+                switch (player)
+                {
+                    case 'X':
+                        return Moves.Scissors;
+                    case 'Z':
+                        return Moves.Paper;
+                    default:
+                        Console.WriteLine("case error");
+                        return Moves.None;
+                }
+            }
+            else if (opponent == Moves.Paper)
+            {
+                switch (player)
+                {
+                    case 'X':
+                        return Moves.Rock;
+                    case 'Z':
+                        return Moves.Scissors;
+                    default:
+                        Console.WriteLine("case error");
+                        return Moves.None;
+                }
+            }
+            else if (opponent == Moves.Scissors)
+            {
+                switch (player)
+                {
+                    case 'X':
+                        return Moves.Paper;
+                    case 'Z':
+                        return Moves.Rock;
+                    default:
+                        Console.WriteLine("case error");
+                        return Moves.None;
+                }
+            }
+            else
+            {
+                Console.WriteLine("if error");
+                return Moves.None;
+            }
         }
 
 
