@@ -14,6 +14,23 @@ void moveFromTo(std::list<char> *from, std::list<char> *to, int amount)
     }
 }
 
+void moveMultipleFromTo(std::list<char> *from, std::list<char> *to, int amount)
+{
+
+    std::list<char> temp;
+
+    for (size_t i = 0; i < amount; i++)
+    {
+        temp.push_back(from->back());
+        from->pop_back();
+    }
+    for (size_t i = 0; i < amount; i++)
+    {
+        to->push_back(temp.back());
+        temp.pop_back();
+    }
+}
+
 int main()
 {
     std::ifstream inputFile("input2.txt");
@@ -65,7 +82,7 @@ int main()
                 int to = stoi(segments[5]);
                 int amount = stoi(segments[1]);
 
-                moveFromTo(&stacks[from - 1], &stacks[to - 1], amount);
+                moveMultipleFromTo(&stacks[from - 1], &stacks[to - 1], amount);
             }
         }
 
