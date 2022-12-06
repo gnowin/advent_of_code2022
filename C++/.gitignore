@@ -1,0 +1,11 @@
+#ignore all executables
+*.out
+
+#ignore swp files
+*.swp
+
+#ignore vscode
+.vscode
+.vscode/
+.vscode/*
+!.vscode/launch.json
